@@ -1,0 +1,23 @@
+{
+  "name": "pampabooks",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "sistema",
+    "web",
+    "livraria"
+  ],
+  "author": "Carolina de Moraes, Elisiana Campos e Letícia Dall'Osto",
+  "license": "ISC",
+  "description": "Desenvolvimento de uma Aplicação Web em Microsserviços",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.6.1"
+  }
+}
