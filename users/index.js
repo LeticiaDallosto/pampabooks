@@ -21,7 +21,7 @@ app.use(express.json());
 
 // Importar e usar rotas
 const userRoutes = require('./routes/userRoutes');
-app.use('/users', userRoutes);
+app.use('/', userRoutes);
 
 // Exportar a aplicação configurada
 module.exports = app;

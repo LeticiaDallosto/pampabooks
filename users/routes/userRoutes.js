@@ -4,7 +4,7 @@ const router = express.Router();
 const User = require('../models/userModel');
 
 // Rota para criar usuário
-router.post('/users', async (req, res) => {
+router.post('/', async (req, res) => {
     try{
         const user = new User(req.body);
         await user.save();
@@ -15,7 +15,7 @@ router.post('/users', async (req, res) => {
 });
 
 // Rota para buscar usuário
-router.get('/users', async (req, res) => {
+router.get('/', async (req, res) => {
     try{
         const users = await User.find({});
         res.status(200).send(users);
@@ -25,7 +25,7 @@ router.get('/users', async (req, res) => {
 });
 
 // Rota para atualizar usuário
-router.patch('/users/:id', async (req, res) => {
+router.patch('/:id', async (req, res) => {
     try{
         const user = await User.findByIdAndUpdate(req.params.id, req.body, {new: true});
         res.status(200).send(user);
@@ -39,7 +39,7 @@ router.patch('/users/:id', async (req, res) => {
 });
 
 // Rota para deletar usuário
-router.delete('/users/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
     try{
         const user = await User.findByIdAndDelete(req.params.id);
         if(!user) {
