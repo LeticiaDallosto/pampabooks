@@ -19,8 +19,9 @@ mongoose.connect(process.env.MONGO_URI)
 /* O Json é usado nas rotas */
 app.use(express.json());
 
-// Importar rotas
-app.use(require('./routes/userRoutes'));
+// Importar e usar rotas
+const userRoutes = require('./routes/userRoutes');
+app.use('/users', userRoutes);
 
 // Exportar a aplicação configurada
 module.exports = app;
