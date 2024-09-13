@@ -1,28 +1,72 @@
-document.getElementById('myForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const idUser = document.getElementById('enConsult').value;
-    const url = `http://localhost:3000/users/${idUser}`;
-    const user = document.getElementById('enUser').value;
-    const password = document.getElementById('enPassword').value;
-    const auth = 'Basic ' + window.btoa(user + ':' + password);
-    fetch(url, {
-        method: 'GET',
-        headers: {
-            'Authorization': auth,
-            'Content-Type':'application/json'
+// Importar módulos
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const { validationResult } = require('express-validator');
+const User = require('../models/userModel');
+const secret = process.env.SECRET;
+const secretRefresh = process.env.SECRET_REFRESH;
+
+// Função para gerar tokens de acesso
+const generateTokens = (user) => {
+    const accessToken = jwt.sign({name: user.name}, secret, {expiresIn: '1h'});
+    const refreshToken = jwt.sign({name: user.name}, secretRefresh, {expiresIn: '7d'});
+    return {token: accessToken, refreshToken};
+}
+
+// Função para registrar usuário
+const userRegister = async (req, res) => {
+    const errors = validationResult(req);
+    if(!errors.isEmpty()) {
+        return res.status(400).json({errors: errors.array()});
+    }
+    const { name, password } = req.body;
+    try {
+        const encryptedPassword = bcrypt.hashSync(password, 10);
+        const newUser = new User({name, password: encryptedPassword});
+        await newUser.save();
+        res.status(201).json({message: 'Usuário registrado com sucesso!'});
+    } catch(err) {
+        res.status(500).json({message: 'Erro ao registrar usuário: ' + err});
+    }
+};
+
+// Função para fazer login
+const userLogin = async (req, res) => {
+    const errors = validationResult(req);
+    if(!errors.isEmpty()) {
+        return res.status(400).json({errors: errors.array()});
+    }
+    const { name, password } = req.body;
+    try {
+        const user = await User.findOne({name});
+        if(!user) {
+            return res.status(404).json({message: 'Usuário não encontrado!'});
         }
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Erro: Usuário não localizado!');
+        const validPassword = bcrypt.compareSync(password, user.password);
+        if(!validPassword) {
+            return res.status(401).json({message: 'Senha inválida!'});
         }
-        return response.json();
-    })
-    .then(data => {
-        document.getElementById('saConsulta').textContent = JSON.
-        stringify(data,null,2);
-        })
-        .catch(erro => {
-            document.getElementById('saConsulta').textContent = erro.message;
-        });
+        const tokens = generateTokens(user);
+        res.json({token: tokens});
+    } catch(err) {
+        res.status(500).json({message: 'Erro ao fazer login: ' + err});
+    }
+};
+
+// Função para renovar token
+const renewToken = (req, res) => {
+    const { refreshToken } = req.body;
+    if(!refreshToken) {
+        return res.status(403).json({message: 'Token de renovação não fornecido!'});
+    }
+    jwt.verify(refreshToken, secretRefresh, (err, user) => {
+        if(err) {
+            return res.status(401).json({message: 'Token de renovação inválido!'});
+        }
+        const newToken = jwt.sign({name: user.name}, secret, {expiresIn: '1h'});
+        res.json({token: newToken});
     });
+};
+
+// Exportar funções
+module.exports = { userRegister, userLogin, renewToken };

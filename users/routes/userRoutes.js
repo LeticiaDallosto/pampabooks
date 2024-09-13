@@ -1,18 +1,30 @@
 // Importar módulos
 const express = require('express');
+const { check } = require('express-validator');
+const { userRegister, userLogin, renewToken } = require('../controllers/userController');
 const router = express.Router();
 const User = require('../models/userModel');
+const verifyToken = require('../authorizationMiddleware');
 
 // Rota para criar usuário
-router.post('/', async (req, res) => {
-    try{
-        const user = new User(req.body);
-        await user.save();
-        res.status(201).send(user);
-    } catch(err) {
-        res.status(400).send(err);
-    }
+router.post('/register', [
+    check('name').not().isEmpty().withMessage('Nome é obrigatório.'),
+    check('password').isLength({min: 6}).withMessage('Senha deve ter no mínimo 6 caracteres.')
+], userRegister);
+
+// Rota para login do usuário
+router.post('/login', [
+    check('name').not().isEmpty().withMessage('Nome é obrigatório.'),
+    check('password').isLength({min: 6}).withMessage('Senha deve ter no mínimo 6 caracteres.')
+], userLogin);
+
+// Rota protegida
+router.get('/protecteData', verifyToken, (req, res) => {
+    res.jason({ message: 'Você tem acesso a essa rota protegida!', user: req.user });
 });
+
+// Rota para renovar token
+router.post('/renewToken', renewToken);
 
 // Rota para buscar usuário
 router.get('/', async (req, res) => {

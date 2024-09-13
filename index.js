@@ -1,7 +1,6 @@
 // Importar módulos
 const express = require('express');
 const userApp = require('./users');
-const path = require('path');
 
 // Criar aplicação express
 const app = express();
@@ -15,5 +14,5 @@ app.use('/users', userApp);
 
 // Iniciar servidor
 app.listen(port, () => {
-    console.log(`Servidor rodando em http://localhost:${port}`);
+    console.log(`Servidor geral rodando em http://localhost:${port}`);
 });
