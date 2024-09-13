@@ -10,10 +10,10 @@ const verifyToken = (req, res, next) => {
   }
   jwt.verify(token, secret, (err, userDecoded) => { 
     if (err) {
-      return res.status(401).json({ message: 'Falha na verificação do token!' });
+      return res.status(500).json({ message: 'Falha na verificação do token!' });
     }
     req.user = userDecoded;
-    return next();
+    next();
   });
 };
 

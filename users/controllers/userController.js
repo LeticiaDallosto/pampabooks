@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { validationResult } = require('express-validator');
 const User = require('../models/userModel');
+require('dotenv').config();
 const secret = process.env.SECRET;
 const secretRefresh = process.env.SECRET_REFRESH;
 
@@ -19,10 +20,13 @@ const userRegister = async (req, res) => {
     if(!errors.isEmpty()) {
         return res.status(400).json({errors: errors.array()});
     }
-    const { name, password } = req.body;
+    const { name, password, email, age, photo } = req.body;
+    if (!email) {
+        return res.status(400).json({message: 'Email é obrigatório!'});
+    }
     try {
         const encryptedPassword = bcrypt.hashSync(password, 10);
-        const newUser = new User({name, password: encryptedPassword});
+        const newUser = new User({name, password: encryptedPassword, email, age, photo});
         await newUser.save();
         res.status(201).json({message: 'Usuário registrado com sucesso!'});
     } catch(err) {
