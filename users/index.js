@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/userRoutes');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 // Criar aplicação express
 const app = express();
@@ -11,6 +12,7 @@ const port = process.env.PORT;
 
 // Configurar a aplicação para usar o body-parser
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Conectar ao banco de dados
 mongoose.connect(process.env.MONGO_URI)

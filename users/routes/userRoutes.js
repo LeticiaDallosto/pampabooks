@@ -19,8 +19,8 @@ router.post('/login', [
 ], userLogin);
 
 // Rota protegida
-router.get('/protecteData', verifyToken, (req, res) => {
-    res.jason({ message: 'Você tem acesso a essa rota protegida!', user: req.user });
+router.get('/protectedData', verifyToken, (req, res) => {
+    res.json({ message: 'Você tem acesso a essa rota protegida!', user: req.user });
 });
 
 // Rota para renovar token
