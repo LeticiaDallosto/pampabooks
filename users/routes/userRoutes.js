@@ -15,7 +15,7 @@ router.post('/register', [
 // Rota para login do usuário
 router.post('/login', [
     check('name').not().isEmpty().withMessage('Nome é obrigatório.'),
-    check('password').isLength({min: 6}).withMessage('Senha deve ter no mínimo 6 caracteres.')
+    check('password').not().isEmpty().withMessage('Senha é obrigatória.')
 ], userLogin);
 
 // Rota protegida

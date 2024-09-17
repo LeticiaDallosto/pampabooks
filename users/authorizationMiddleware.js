@@ -6,7 +6,7 @@ const secret = process.env.SECRET;
 // Função para verificar o token
 const verifyToken = (req, res, next) => {
   const authHeader = req.headers['authorization'];
-  console.log('Autorização: ' + authHeader);	
+  console.log('Autorização: ', authHeader);	
   if (!authHeader) {
     return res.status(403).json({ message: 'Token não fornecido!' });
   }

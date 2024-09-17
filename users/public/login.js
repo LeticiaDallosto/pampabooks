@@ -8,18 +8,18 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email, name, password })
+        body: JSON.stringify({ name, password })
     });
     const data = await response.json();
-    const message = document.getElementById('message');
+    const loginMessage = document.getElementById('message');
     if (response.ok) {
-        localStorage.setItem('token', data.token);
+        localStorage.setItem('token', data.accessToken);
         localStorage.setItem('refreshToken', data.refreshToken);
-        message.textContent = 'Login efetuado com sucesso!';
+        loginMessage.textContent = 'Login efetuado com sucesso!';
         setTimeout(() => {
             window.location.href = '/dashboard.html';
         }, 1000);
     } else {
-        message.textContent = data.message;
+        loginMessage.textContent = data.message;
     }
 });
