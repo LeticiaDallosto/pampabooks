@@ -7,13 +7,6 @@ require('dotenv').config();
 const secret = process.env.SECRET;
 const secretRefresh = process.env.SECRET_REFRESH;
 
-// Função para gerar tokens de acesso
-const generateTokens = (user) => {
-    const accessToken = jwt.sign({name: user.name}, secret, {expiresIn: '1h'});
-    const refreshToken = jwt.sign({name: user.name}, secretRefresh, {expiresIn: '7d'});
-    return {token: accessToken, refreshToken};
-}
-
 // Função para registrar usuário
 const userRegister = async (req, res) => {
     const errors = validationResult(req);
@@ -51,10 +44,17 @@ const userLogin = async (req, res) => {
             return res.status(401).json({message: 'Senha inválida!'});
         }
         const tokens = generateTokens(user);
-        res.json({token: tokens});
+        res.json({ accessToken: tokens.accessToken, refreshToken: tokens.refreshToken });
     } catch(err) {
         res.status(500).json({message: 'Erro ao fazer login: ' + err});
     }
+};
+
+// Função para gerar tokens de acesso
+const generateTokens = (user) => {
+    const accessToken = jwt.sign({name: user.name}, secret, {expiresIn: '1h'});
+    const refreshToken = jwt.sign({name: user.name}, secretRefresh, {expiresIn: '7d'});
+    return {accessToken, refreshToken};
 };
 
 // Função para renovar token
