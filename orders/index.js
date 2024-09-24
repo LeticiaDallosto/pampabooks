@@ -2,14 +2,14 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-const userRoutes = require('./routes/userRoutes');
 const bodyParser = require('body-parser');
+const orderRoutes = require('./routes/orderRoutes');
 const path = require('path');
 
 // Criar aplicação express
 const app = express();
-// const port = process.env.PORT || 3002;
-const port = 3002;
+// const port = process.env.PORT || 3004; 
+const port = 3004; 
 
 // Configurar a aplicação para usar o body-parser
 app.use(bodyParser.json());
@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Conectar ao banco de dados
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
-        console.log('Users conectado ao mongoDB!');
+        console.log('Order conectado ao mongoDB!');
     })
     .catch((err) => {
         console.log('Erro ao conectar ao mongoDB: ' + err);
@@ -29,11 +29,11 @@ mongoose.connect(process.env.MONGO_URI)
 app.use(express.json());
 
 // Utilizar rotas importadas
-app.use('/', userRoutes);
+app.use('/', orderRoutes);
 
 // Iniciar a aplicação na porta 3002
 app.listen(port, () => {
-    console.log(`Servidor de usuários rodando em http://localhost:${port}`);
+    console.log(`Servidor de pedidos rodando em http://localhost:${port}`);
 });
 
 // Exportar a aplicação configurada
