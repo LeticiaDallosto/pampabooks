@@ -31,7 +31,7 @@ app.use(express.json());
 // Utilizar rotas importadas
 app.use('/', orderRoutes);
 
-// Iniciar a aplicação na porta 3002
+// Iniciar a aplicação na porta 3004
 app.listen(port, () => {
     console.log(`Servidor de pedidos rodando em http://localhost:${port}`);
 });

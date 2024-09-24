@@ -2,12 +2,12 @@ document.addEventListener('DOMContentLoaded', () => {
     orderList(); 
 
     const orderForm = document.getElementById('order-form');
-    formPedido.addEventListener('submit', async (e) => {
+    orderForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const bookId = document.getElementById('bookId').value;
         const quantity = document.getElementById('quantity').value;
         const order = {
-            bookId: parseInt(bookId),
+            bookId: bookId,
             quantity: parseInt(quantity)
         };
         try {
@@ -31,16 +31,16 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response = await fetch('/orders');
             const orders = await response.json();
-            const ordersContainer = document.getElementById('order-form');
+            const ordersContainer = document.getElementById('orders-container');
             ordersContainer.innerHTML = '';
             orders.forEach(order => {
                 const divOrder = document.createElement('div');
-                divOrder.classList.add('pedido');
+                divOrder.classList.add('order');
                 divOrder.innerHTML = `
                     <h3>Pedido</h3>
                     <p>Nome do Livro: ${order.bookName}</p>
                     <p>Quantidade: ${order.quantity}</p>
-                    <p>Preço Total: R$ ${order.totalprice.toFixed(2)}</p> <!-- Adicionado espaço -->
+                    <p>Preço Total: R$ ${order.totalPrice.toFixed(2)}</p>
                 `;
                 ordersContainer.appendChild(divOrder);
             });
