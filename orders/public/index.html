@@ -8,19 +8,17 @@
     <script src="order.js" defer></script>
 </head>
 <body>
-    <div class="container">
-    <h2>Criar Pedido</h2>
-    <form id="form-order">
-        <label for="bookId">ID do Livro:</label>
-        <input type="number" name="bookId" id="bookId" required>
-        <label for="quantity">Quantidade:</label>
-        <input type="number" name="quantity" id="quantity" required>
+    <h1>Pedidos</h2>
+    <form id="order-form">
+        <label for="bookId">ID do Livro: </label>
+        <input type="text" name="bookId" id="bookId" required><br>
+        <label for="quantity">Quantidade: </label>
+        <input type="number" name="quantity" id="quantity" required><br>
         <button type="submit">Fazer pedido</button>
     </form>
-    <div id="message"></div>
-    <h2>Listar Pedidos</h2>
+    <div id="order-message"></div>
+
+    <h2>Lista de Pedidos</h2>
     <div id="orders-container"></div>
-    </div>
-    <script src="./app.js"></script>
 </body>
 </html>

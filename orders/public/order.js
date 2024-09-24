@@ -1,18 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
-    orderList(); //Listar os pedidos ao carregar a página
+    orderList(); 
 
-    const formOrder = document.getElementById('form-order');
+    const orderForm = document.getElementById('order-form');
     formPedido.addEventListener('submit', async (e) => {
         e.preventDefault();
-
         const bookId = document.getElementById('bookId').value;
         const quantity = document.getElementById('quantity').value;
-
         const order = {
             bookId: parseInt(bookId),
             quantity: parseInt(quantity)
         };
-
         try {
           const response = await fetch('/orders', {
             method: 'POST',
@@ -21,24 +18,21 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             body: JSON.stringify(order)
           });  
-
           const result = await response.text();
-          document.getElementById('message').innerText = result;
-          orderList(); // Atualizar a lista de pedids cadastrados
+          document.getElementById('order-message').innerText = result;
+          orderList(); 
         } catch (erro) {
-            document.getElementById('message').innerText = 'Erro ao fazer o pedido.';
+            document.getElementById('order-message').innerText = 'Erro ao fazer o pedido.';
         }
     });
 
-// Função para listar pedidos
+    // Função para listar pedidos
     async function orderList() {
         try {
             const response = await fetch('/orders');
             const orders = await response.json();
-
-            const ordersContainer = document.getElementById('orders-container');
+            const ordersContainer = document.getElementById('order-form');
             ordersContainer.innerHTML = '';
-
             orders.forEach(order => {
                 const divOrder = document.createElement('div');
                 divOrder.classList.add('pedido');

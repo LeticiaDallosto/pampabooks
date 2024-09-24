@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const catalogRoutes = require('./routes/catalogRoutes');
+const bodyParser = require('body-parser');
 const path = require('path');
 
 // Criar aplicação express
@@ -10,6 +11,8 @@ const app = express();
 // const port = process.env.PORT || 3003; 
 const port = 3003; 
 
+// Configurar a aplicação para usar o body-parser
+app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Conectar ao banco de dados
@@ -28,7 +31,7 @@ app.use(express.json());
 // Utilizar rotas importadas
 app.use('/', catalogRoutes);
 
-// Iniciar a aplicação na porta 3002
+// Iniciar a aplicação na porta 3003
 app.listen(port, () => {
     console.log(`Servidor de catálogo rodando em http://localhost:${port}`);
 });

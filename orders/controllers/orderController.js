@@ -5,8 +5,8 @@ const axios = require('axios');
 // Função para listar todos os pedidos
 const orderList = async (req,res) => {
     try {
-        const orders = await Order.find();
-        res.status(200).json(orders);
+        const order = await Order.find();
+        res.status(200).json(order);
     } catch (erro) {
         res.status(500).send('Erro ao listar pedidos');
     }
@@ -16,19 +16,17 @@ const orderList = async (req,res) => {
 const orderCreate = async (req,res) => {
     const { bookId, quantity } = req.body;
     try {
-        const responseOrder = await axios.get(`http://localhost:3004/produtos/${bookId}`);
-        const order = responseOrder.date;
-
-        if(!order) {
+        const productResponse = await axios.get(`http://localhost:3000/catalog/${bookId}`);
+        const product = productResponse.data;
+        if(!product) {
             return res.status(404).send('Produto não encontrado');
         }
         const newOrder = new Order({
-            bookId: book.id,
-            bookName: book.name,
+            bookId: product.id,
+            bookName: product.name,
             quantity,
-            totalPrice: book.price * quantity
+            totalPrice: product.price * quantity
         });
-
         await newOrder.save();
         res.status(201).send('Pedido criado com sucesso');
     }  catch (erro) {

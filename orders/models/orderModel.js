@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 // Definir schema do usuário
 const orderSchema = new mongoose.Schema({
-    bookId: {type: Number, required: true},
+    bookId: {type: String, required: true},
     bookName: {type: String, required: true},
     quantity: {type: Number, required: true},
     totalPrice: {type: Number, required: true},
