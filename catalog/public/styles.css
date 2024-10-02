@@ -65,3 +65,33 @@ button:hover {
     color: #4CAF50;
     text-align: center;
 }
+
+/* Estilo dos cartões de livros */
+.book-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px;
+    text-align: left;
+    display: inline-block;
+    width: 200px;
+    vertical-align: top;
+}
+
+.book-card img {
+    max-width: 100%;
+    border-radius: 4px;
+}
+
+.book-card h3 {
+    color: #333;
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.book-card p {
+    color: #666;
+    font-size: 14px;
+    margin: 5px 0;
+}

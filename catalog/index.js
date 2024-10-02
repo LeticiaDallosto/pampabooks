@@ -29,7 +29,7 @@ mongoose.connect(process.env.MONGO_URI)
 app.use(express.json());
 
 // Utilizar rotas importadas
-app.use('/', catalogRoutes);
+app.use('/catalog', catalogRoutes);
 
 // Iniciar a aplicação na porta 3003
 app.listen(port, () => {
