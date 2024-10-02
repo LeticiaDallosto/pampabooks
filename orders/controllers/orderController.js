@@ -23,7 +23,7 @@ const orderCreate = async (req,res) => {
             return res.status(404).send('Produto não encontrado');
         }
         const newOrder = new Order({
-            bookId: product.id,
+            bookId: bookId,
             bookName: product.name,
             quantity,
             totalPrice: product.price * quantity
@@ -31,7 +31,7 @@ const orderCreate = async (req,res) => {
         await newOrder.save();
         res.status(201).send('Pedido criado com sucesso');
     }  catch (erro) {
-        console.log(erro);
+        console.error('Erro ao criar pedido:', erro);
         res.status(500).send('Erro ao criar pedido');
     }
 };

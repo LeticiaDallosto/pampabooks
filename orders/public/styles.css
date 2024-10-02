@@ -65,3 +65,39 @@ button:hover {
     color: #4CAF50;
     text-align: center;
 }
+
+/* Estilo das notas de pedidos */
+.order-note {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px;
+    text-align: left;
+    display: inline-block;
+    width: 200px;
+    vertical-align: top;
+    position: relative;
+}
+.order-note::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 10px;
+    background-color: #fff;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.order-note h3 {
+    color: #333;
+    font-size: 18px;
+    margin: 10px 0;
+}
+.order-note p {
+    color: #666;
+    font-size: 14px;
+    margin: 5px 0;
+}

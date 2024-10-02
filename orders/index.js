@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Conectar ao banco de dados
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
-        console.log('Order conectado ao mongoDB!');
+        console.log('Orders conectado ao mongoDB!');
     })
     .catch((err) => {
         console.log('Erro ao conectar ao mongoDB: ' + err);
@@ -29,7 +29,7 @@ mongoose.connect(process.env.MONGO_URI)
 app.use(express.json());
 
 // Utilizar rotas importadas
-app.use('/', orderRoutes);
+app.use('/orders', orderRoutes);
 
 // Iniciar a aplicação na porta 3004
 app.listen(port, () => {

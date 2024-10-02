@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
           });  
           const result = await response.text();
           document.getElementById('order-message').innerText = result;
+          orderForm.reset();
           orderList(); 
         } catch (erro) {
             document.getElementById('order-message').innerText = 'Erro ao fazer o pedido.';
@@ -35,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ordersContainer.innerHTML = '';
             orders.forEach(order => {
                 const divOrder = document.createElement('div');
-                divOrder.classList.add('order');
+                divOrder.classList.add('order-note');
                 divOrder.innerHTML = `
                     <h3>Pedido</h3>
                     <p>Nome do Livro: ${order.bookName}</p>
