@@ -3,6 +3,7 @@ const express = require('express');
 const userApp = require('./users');
 const catalogApp = require('./catalog');
 const orderApp = require('./orders');
+const reviewApp = require('./reviews');
 
 // Criar aplicação express
 const app = express();
@@ -19,6 +20,9 @@ app.use('/catalog', catalogApp);
 
 // Usar as rotas do módulo orders
 app.use('/orders', orderApp);
+
+// Usar as rotas do módulo reviews
+app.use('/reviews', reviewApp);
 
 // Iniciar servidor
 app.listen(port, () => {

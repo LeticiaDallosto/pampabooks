@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliações</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="review.js" defer></script>
+</head>
+<body>
+    <h1>Avaliações</h1>
+    <div id="reviews-container"></div>
+
+    <h2>Enviar Avaliação</h2>
+    <form id="review-form">
+        <label for="review-comment">Comentário:</label>
+        <textarea id="review-comment" name="review-comment" rows="4" required></textarea>
+
+        <label for="rating">Nota:</label>
+        <select id="rating" name="rating" required>
+            <option value="" disabled selected>Selecione uma nota</option>
+            <option value="1">1 estrela</option>
+            <option value="2">2 estrelas</option>
+            <option value="3">3 estrelas</option>
+            <option value="4">4 estrelas</option>
+            <option value="5">5 estrelas</option>
+        </select>
+
+        <!-- Novos Campos -->
+        <label for="book-id">ID do Livro:</label>
+        <input type="text" id="book-id" name="book-id" required>
+
+        <label for="book-name">Nome do Livro:</label>
+        <input type="text" id="book-name" name="book-name" required>
+
+        <label for="user-id">Seu ID:</label>
+        <input type="text" id="user-id" name="user-id" required>
+
+        <label for="user-name">Seu Nome:</label>
+        <input type="text" id="user-name" name="user-name" required>
+        
+        <button type="submit">Enviar Review</button>
+    </form>
+
+    <!-- Div para exibir a mensagem de feedback -->
+    <div id="feedback-message"></div>
+</body>
+</html>
