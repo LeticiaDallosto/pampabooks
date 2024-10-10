@@ -5,8 +5,8 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const reviewRoutes = require('./routes/reviewRoutes');
 const path = require('path');
-// const cors = require('cors'); 
 
+// Criar aplicação express
 const app = express();
 // const port = process.env.PORT || 3005; 
 const port = 3005;
@@ -14,9 +14,6 @@ const port = 3005;
 // Configurar a aplicação para usar o body-parser
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
-
-// Habilitar CORS (se necessário)
-// app.use(cors());
 
 // Conectar ao banco de dados
 mongoose.connect(process.env.MONGO_URI)

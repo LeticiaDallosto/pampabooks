@@ -5,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Avaliações</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="review.js" defer></script>
 </head>
 <body>
-    <h1>Avaliações</h1>
-    <div id="reviews-container"></div>
-
-    <h2>Enviar Avaliação</h2>
+    <h1>Enviar Avaliação</h1>
     <form id="review-form">
         <label for="review-comment">Comentário:</label>
         <textarea id="review-comment" name="review-comment" rows="4" required></textarea>
@@ -39,10 +37,13 @@
         <label for="user-name">Seu Nome:</label>
         <input type="text" id="user-name" name="user-name" required>
         
-        <button type="submit">Enviar Review</button>
+        <button type="submit">Enviar Avaliação</button>
     </form>
 
     <!-- Div para exibir a mensagem de feedback -->
     <div id="feedback-message"></div>
+
+    <h2>Lista de Avaliações</h2>
+    <div id="reviews-container"></div>
 </body>
 </html>

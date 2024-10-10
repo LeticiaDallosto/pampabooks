@@ -55,21 +55,21 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response = await fetch('/catalog');
             const catalog = await response.json();
-
+    
             if (catalog.length === 0) {
                 document.getElementById('catalog-container').innerText = 'Nenhum produto cadastrado.';
                 return;
             }
-
+    
             const catalogContainer = document.getElementById('catalog-container');
             catalogContainer.innerHTML = '';
             catalog.forEach(product => {
                 const productDiv = document.createElement('div');
                 productDiv.classList.add('book-card');
                 productDiv.innerHTML = `
-                <img src="https://via.placeholder.com/150" alt="Imagem do Livro">
-                <h3>${product.name}</h3>
-                <p>Preço: R$ ${product.price.toFixed(2)}</p>
+                    <i class="fas fa-book book-icon"></i>
+                    <h3>${product.name}</h3>
+                    <p>Preço: R$ ${product.price.toFixed(2)}</p>
                 `;
                 catalogContainer.appendChild(productDiv);
             });

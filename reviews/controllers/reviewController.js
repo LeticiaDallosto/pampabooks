@@ -1,4 +1,6 @@
+// Importar módulos
 const Review = require('../models/reviewModel');
+require('dotenv').config();
 
 // Listar todas as reviews
 exports.listarReviews = async (req, res) => {

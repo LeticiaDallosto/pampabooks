@@ -78,18 +78,19 @@ button:hover {
     width: 200px;
     vertical-align: top;
 }
-
-.book-card img {
-    max-width: 100%;
-    border-radius: 4px;
+.book-icon {
+    font-size: 50px;
+    background: linear-gradient(45deg, #74543f, #c09c72d2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: block;
+    margin: 0 auto 10px;
 }
-
 .book-card h3 {
     color: #333;
     font-size: 18px;
     margin: 10px 0;
 }
-
 .book-card p {
     color: #666;
     font-size: 14px;

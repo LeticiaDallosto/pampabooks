@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 // Definir schema da review com timestamps
-const ReviewSchema = new mongoose.Schema({
+const reviewSchema = new mongoose.Schema({
     bookId: { type: String, required: true }, // ID do livro
     bookName: { type: String, required: true }, // Nome do livro
     userId: { type: String, required: true }, // ID do usuário que fez a avaliação
@@ -11,7 +11,7 @@ const ReviewSchema = new mongoose.Schema({
 }, { timestamps: true }); // Habilitar timestamps (createdAt, updatedAt)
 
 // Definir modelo de revisão
-const Review = mongoose.model('Review', ReviewSchema);
+const Review = mongoose.model('Review', reviewSchema);
 
 // Exportar modelo
 module.exports = Review;

@@ -7,14 +7,21 @@ document.addEventListener('DOMContentLoaded', () => {
     function addReview(review) {
         const reviewDiv = document.createElement('div');
         reviewDiv.className = 'review';
+        
+        // Gerar estrelas
+        let stars = '';
+        for (let i = 0; i < review.rating; i++) {
+            stars += '<i class="fas fa-star"></i>';
+        }
+    
         reviewDiv.innerHTML = `
-            <h3>Avaliação: ${review.rating} estrelas</h3>
-            <p><strong>Livro:</strong> ${review.bookName} (ID: ${review.bookId})</p>
-            <p><strong>Usuário:</strong> ${review.userName} (ID: ${review.userId})</p>
+            <h3>Livro: ${review.bookName} </h3>
+            <p><strong>Avaliação:</strong> ${stars}</p>
+            <p><strong>Usuário:</strong> ${review.userName} </p>
             <p>${review.reviewText}</p>
-            <p><em>Enviada em: ${new Date(review.createdAt).toLocaleString()}</em></p>
+            <small><em>Enviada em: ${new Date(review.createdAt).toLocaleString()}</em></small>
         `;
-        reviewsContainer.appendChild(reviewDiv);
+        document.getElementById('reviews-container').appendChild(reviewDiv);
     }
 
     // Função para exibir uma mensagem de feedback
@@ -30,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Função para carregar as reviews do servidor
     function loadReviews() {
-        fetch('/api/reviews')
+        fetch('/reviews')
             .then(response => response.json())
             .then(data => {
                 if (Array.isArray(data)) {
@@ -77,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         // Enviar os dados para o servidor
-        fetch('/api/reviews', {
+        fetch('/reviews', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -88,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             if (data._id) { // Verifica se a review foi criada com sucesso
                 addReview(data); // Adiciona a nova review à lista
-                showMessage('Review enviada com sucesso!', true);
+                showMessage('Avaliação enviada com sucesso!', true);
                 reviewForm.reset(); // Limpa o formulário
             } else {
                 showMessage('Erro ao enviar review: ' + (data.mensagem || 'Erro desconhecido'), false);
