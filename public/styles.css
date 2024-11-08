@@ -1,0 +1,312 @@
+/* Estilo do cabeçalho */
+.header-background {
+    background: linear-gradient(135deg, #81b29a, #3a5a40); 
+    color: #ffffff;
+    padding: 25px;
+    text-align: center;
+    border-bottom: 4px solid #d1d5db; 
+}
+
+.header-background h1 {
+    font-family: 'Merriweather', serif;
+    font-size: 2.5em;
+    font-weight: 500;
+    margin: 0;
+    background: linear-gradient(to right, #a2bba6, #d4ebdf); 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.header-background nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0 0;
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+}
+
+.header-background nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.1em;
+    transition: color 0.3s, border-bottom 0.3s;
+    padding-bottom: 4px;
+    border-bottom: 2px solid transparent;
+}
+
+.header-background nav ul li a:hover {
+    color: #d1d5db; /* Cinza claro */
+    border-bottom: 2px solid #d1d5db;
+}
+
+/* Estilo do rodapé */
+footer {
+    background-color: #3a5a40;
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
+    border-top: 4px solid #d1d5db; /* Borda superior em cinza claro */
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.9em;
+}
+
+footer p, footer ul li {
+    margin: 8px 0;
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Estilo geral */
+body {
+    font-family: 'Merriweather', serif;
+    background: linear-gradient(135deg, #f0f4f8, #e1e9ec); 
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-image: url('../images/background.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+/* Títulos */
+h1 {
+    text-align: center;
+    font-weight: 500; 
+    margin-top: 0;
+    background: linear-gradient(to right, #3a5a40, #81b29a); 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+h2 {
+    text-align: center;
+    font-weight: 500; 
+    margin-top: 0;
+    background: linear-gradient(to right, #3a5a40, #81b29a); 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Estilo do formulário */
+form {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08); /* Sombra mais suave */
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #3a5a40;
+}
+
+input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #a3b18a;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #3a5a40, #2d6a4f); /* Gradiente no botão */
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #2d6a4f, #3a5a40); /* Gradiente invertido no hover */
+}
+
+/* Estilo do catálogo */
+#catalog-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.book-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra mais leve */
+    padding: 20px;
+    margin: 15px;
+    text-align: center;
+    width: 220px;
+    display: inline-block;
+    vertical-align: top;
+    transition: transform 0.3s;
+}
+
+.book-card:hover {
+    transform: scale(1.03);
+}
+
+.book-icon {
+    font-size: 50px;
+    background: linear-gradient(45deg, #3a5a40, #81b29a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0 auto 10px;
+}
+
+.book-card h3 {
+    color: #3a5a40;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 8px 0;
+}
+
+.book-card p {
+    color: #666;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+/* Estilo de pedidos */
+#orders-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.order-note {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px;
+    text-align: left;
+    display: inline-block;
+    width: 200px;
+    vertical-align: top;
+    position: relative;
+}
+
+.order-note::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 10px;
+    background-color: #fff;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.order-note h3 {
+    color: #333;
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.order-note p {
+    color: #666;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+/* Estilo das avaliações */
+#reviews-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Campo de texto para review */
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+    height: 100px; /* Altura padrão para o campo de review */
+}
+
+#rating {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 2px #000;
+}
+
+/* Mensagem de envio do review */
+#review-message {
+    margin-top: 20px;
+    color: #4CAF50;
+    text-align: center;
+}
+
+/* Estilo das notas de avaliações */
+.review {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin: 20px;
+    text-align: left;
+    display: inline-block;
+    width: 200px;
+    vertical-align: top;
+    position: relative;
+}
+
+.review::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 10px;
+    background-color: #fff;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.review h3 {
+    color: #333;
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.review p {
+    color: #666;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+/* Estilo das estrelas de avaliação */
+.review .fa-star {
+    color: #FFD700; /* Cor dourada para as estrelas */
+    margin-right: 2px;
+}

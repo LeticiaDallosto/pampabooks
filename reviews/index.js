@@ -14,6 +14,7 @@ const port = 3005;
 // Configurar a aplicação para usar o body-parser
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // Conectar ao banco de dados
 mongoose.connect(process.env.MONGO_URI)

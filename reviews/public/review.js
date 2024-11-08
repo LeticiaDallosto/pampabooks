@@ -3,6 +3,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const feedbackMessage = document.getElementById('feedback-message');
     const reviewForm = document.getElementById('review-form');
 
+    // Sincronizar cabeçalho e rodapé
+    fetch('/header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('header').innerHTML = data;
+        });
+    fetch('/footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('footer').innerHTML = data;
+        });
+
     // Função para adicionar uma review à lista
     function addReview(review) {
         const reviewDiv = document.createElement('div');

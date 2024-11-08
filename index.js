@@ -1,5 +1,6 @@
 // Importar módulos
 const express = require('express');
+const path = require('path');
 const userApp = require('./users');
 const catalogApp = require('./catalog');
 const orderApp = require('./orders');
@@ -11,6 +12,9 @@ const port = process.env.PORT || 3000;
 
 // Configurar a aplicação para receber JSON
 app.use(express.json());
+
+// Servir arquivos estáticos da pasta 'public'
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Usar as rotas do módulo users
 app.use('/users', userApp);
