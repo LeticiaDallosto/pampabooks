@@ -1,0 +1,8 @@
+FROM node:22.9.0
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY .env .
+COPY . .
+CMD ["node","index.js"]
+EXPOSE 3004
