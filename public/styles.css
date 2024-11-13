@@ -145,7 +145,6 @@ a {
     text-align: center; 
     color: #3a5a40;
     text-decoration: none;
-    background-color: white;
     border-radius: 10px;
     padding: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
@@ -159,6 +158,10 @@ a:hover {
     text-decoration: underline;
 }
 
+.login-link {
+    background: linear-gradient(135deg, #3a5a40, #81b29a); 
+    color: #ffffff;
+}
 
 /* Estilo do catálogo */
 #catalog-container {

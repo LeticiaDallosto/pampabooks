@@ -17,7 +17,7 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
         localStorage.setItem('refreshToken', data.refreshToken);
         loginMessage.textContent = 'Login efetuado com sucesso!';
         setTimeout(() => {
-            window.location.href = '/dashboard.html';
+            window.location.href = 'http://localhost:3003';
         }, 1000);
     } else {
         loginMessage.textContent = data.message;
