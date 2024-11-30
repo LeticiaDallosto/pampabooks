@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pampabooks
+spec:
+  containers:
+    - name: users
+      image: localhost/users:latest
+      ports:
+        - containerPort: 3002
+      volumeMounts:
+        - name: meus_dados
+          mountPath: /app/users
+    - name: catalog
+      image: localhost/catalog:latest
+      ports:
+        - containerPort: 3003
+      volumeMounts:
+        - name: meus_dados
+          mountPath: /app/catalog
+    - name: orders
+      image: localhost/orders:latest
+      ports:
+        - containerPort: 3004
+      volumeMounts:
+        - name: meus_dados
+          mountPath: /app/orders
+    - name: reviews
+      image: localhost/reviews:latest
+      ports:
+        - containerPort: 3005
+      volumeMounts:
+        - name: meus_dados
+          mountPath: /app/reviews
+    - name: mongoDB
+      image: mongo:latest
+      ports:
+        - containerPort: 27017
+      volumeMounts:
+        - name: meus_dados
+          mountPath: /data/db
+  volumes:
+    - name: meus_dados
+      hostPath:
+        path: /var/lib/containers/storage/volumes/meus_dados/_data
+    - name: mongoDB
+      hostPath:
+        path: /var/lib/containers/storage/volumes/mongoDB/_data
