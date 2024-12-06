@@ -39,8 +39,3 @@ app.listen(port, () => {
 
 // Exportar a aplicação configurada
 module.exports = app;
-
-
-
-
-

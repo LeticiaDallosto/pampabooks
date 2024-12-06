@@ -107,3 +107,14 @@ exports.deletarReview = async (req, res) => {
         res.status(500).json({ mensagem: 'Erro ao deletar Review', erro: erro.message });
     }
 };
+
+// Função para obter reviews por bookId
+exports.obterReviewsPorBookId = async (req, res) => {
+    try {
+        const reviews = await Review.find({ bookId: req.params.bookId });
+        res.json(reviews);
+    } catch (erro) {
+        console.error('Erro ao obter reviews por bookId:', erro);
+        res.status(500).json({ mensagem: 'Erro ao obter reviews', erro: erro.message });
+    }
+};

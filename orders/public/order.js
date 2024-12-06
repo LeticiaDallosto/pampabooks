@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Função para listar pedidos
     orderList(); 
+    // Função para carregar os livros do catálogo
+    loadBooks();
 
     // Sincronizar cabeçalho e rodapé
     fetch('/header.html')
@@ -61,4 +64,22 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Erro ao listar pedidos:\n', erro);
         }
     }
+
+    // Função para carregar os livros do catálogo
+    async function loadBooks() {
+        try {
+            const response = await fetch('http://localhost:3003/catalog');
+            const books = await response.json();
+            const bookSelect = document.getElementById('bookId');
+            books.forEach(book => {
+                const option = document.createElement('option');
+                option.value = book._id;
+                option.text = book.name;
+                bookSelect.appendChild(option);
+            });
+        } catch (erro) {
+            console.error('Erro ao carregar livros do catálogo:', erro);
+        }
+    }
+
 });

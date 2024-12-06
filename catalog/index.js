@@ -5,11 +5,15 @@ const mongoose = require('mongoose');
 const catalogRoutes = require('./routes/catalogRoutes');
 const bodyParser = require('body-parser');
 const path = require('path');
+const cors = require('cors');
 
 // Criar aplicação express
 const app = express();
 // const port = process.env.PORT || 3003; 
 const port = 3003; 
+
+// Configurar o CORS
+app.use(cors());
 
 // Configurar a aplicação para usar o body-parser
 app.use(bodyParser.json());

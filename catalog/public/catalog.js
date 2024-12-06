@@ -1,4 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get('token');
+    if (token) {
+        const userData = JSON.parse(atob(token.split('.')[1]));
+        
+        localStorage.setItem('token', token);
+        localStorage.setItem('userName', userData.name);
+        localStorage.setItem('userId', userData.id);
+
+        const newUrl = window.location.origin + window.location.pathname;
+        window.history.replaceState({}, document.title, newUrl); // Atualiza a URL sem recarregar a página
+    }
+    
     productList();
   
     // Sincronizar cabeçalho e rodapé
@@ -65,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Função para listar produtos
     async function productList() {
         try {
-            const response = await fetch('/catalog');
+            const response = await fetch('http://localhost:3003/catalog');
             const catalog = await response.json();
     
             if (catalog.length === 0) {
@@ -80,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 productDiv.classList.add('book-card');
                 productDiv.innerHTML = `
                     <i class="fas fa-book book-icon"></i>
-                    <h3>${product.name}</h3>
+                    <h3><a href="product.html?id=${product._id}">${product.name}</a></h3>
                     <p>Preço: R$ ${product.price.toFixed(2)}</p>
                 `;
                 catalogContainer.appendChild(productDiv);
@@ -89,4 +102,5 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Erro ao listar produtos.', erro);
         }
     }
+    
 });

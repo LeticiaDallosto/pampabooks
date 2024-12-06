@@ -1,5 +1,8 @@
 document.getElementById('login-form').addEventListener('submit', async (e) => {
     e.preventDefault();
+    
+    localStorage.clear();
+
     const email = document.getElementById('email').value;
     const name = document.getElementById('name').value;
     const password = document.getElementById('password').value;
@@ -8,16 +11,17 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ name, password })
+        body: JSON.stringify({ email, name, password })
     });
     const data = await response.json();
     const loginMessage = document.getElementById('message');
     if (response.ok) {
-        localStorage.setItem('token', data.accessToken);
-        localStorage.setItem('refreshToken', data.refreshToken);
+        // localStorage.setItem('token', data.accessToken);
+        // localStorage.setItem('refreshToken', data.refreshToken);
         loginMessage.textContent = 'Login efetuado com sucesso!';
         setTimeout(() => {
-            window.location.href = 'http://localhost:3003';
+            // window.location.href = 'http://localhost:3003';
+            window.location.href = 'http://localhost:3003?token='+ encodeURIComponent(data.accessToken);
         }, 1000);
     } else {
         loginMessage.textContent = data.message;

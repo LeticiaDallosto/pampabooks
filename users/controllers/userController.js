@@ -52,8 +52,8 @@ const userLogin = async (req, res) => {
 
 // Função para gerar tokens de acesso
 const generateTokens = (user) => {
-    const accessToken = jwt.sign({name: user.name}, secret, {expiresIn: '1h'});
-    const refreshToken = jwt.sign({name: user.name}, secretRefresh, {expiresIn: '7d'});
+    const accessToken = jwt.sign({name: user.name, id: user._id}, secret, {expiresIn: '1h'});
+    const refreshToken = jwt.sign({name: user.name, id: user._id}, secretRefresh, {expiresIn: '7d'});
     return {accessToken, refreshToken};
 };
 

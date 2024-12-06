@@ -17,5 +17,8 @@ router.put('/:id', reviewController.atualizarReview);
 // Rota para Deletar uma Review por ID
 router.delete('/:id', reviewController.deletarReview);
 
+// Rota para obter Reviews por bookId
+router.get('/book/:bookId', reviewController.obterReviewsPorBookId);
+
 // Exportar rotas
 module.exports = router;

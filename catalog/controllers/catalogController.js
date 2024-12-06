@@ -51,8 +51,8 @@ const productList = async (req, res) => {
     try {
         const products = await Catalog.find();
         res.json(products);
-    } catch (error) {
-        res.status(500).json({ message: 'Erro ao listar os produtos' });
+    } catch (err) {
+        res.status(500).send('Erro ao listar produtos: ' + err);
     }
 };
 
