@@ -18,13 +18,30 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // Conectar ao banco de dados
 mongoose.connect(process.env.MONGO_URI)
-    .then(() => {
+    .then(async () => {
         console.log('Users conectado ao mongoDB!');
+
+        // Criar usuário administrador fixo
+        const adminEmail = 'admin@example.com';
+        const adminUser = await User.findOne({ email: adminEmail });
+        if (!adminUser) {
+            const hashedPassword = await bcrypt.hash('adminpassword', 10);
+            const newAdminUser = new User({
+                name: 'Admin',
+                email: adminEmail,
+                password: hashedPassword,
+                isAdmin: true
+            });
+            await newAdminUser.save();
+            console.log('Usuário administrador criado com sucesso!');
+        } else {
+            console.log('Usuário administrador já existe.');
+        }
     })
     .catch((err) => {
         console.log('Erro ao conectar ao mongoDB: ' + err);
     });
-
+    
 // Configurar a aplicação para receber JSON 
 /* O Json é usado nas rotas */
 app.use(express.json());

@@ -8,7 +8,7 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email, name, password })
+        body: JSON.stringify({ email, name, password, isAdmin: false })
     });
     const data = await response.json();
     const message = document.getElementById('message');

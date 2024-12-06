@@ -7,9 +7,17 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('token', token);
         localStorage.setItem('userName', userData.name);
         localStorage.setItem('userId', userData.id);
+        localStorage.setItem('isAdmin', userData.isAdmin); 
 
         const newUrl = window.location.origin + window.location.pathname;
         window.history.replaceState({}, document.title, newUrl); // Atualiza a URL sem recarregar a página
+    }
+
+    const isAdmin = localStorage.getItem('isAdmin') === 'true';
+
+    // Ocultar formulário de cadastro de produto se o usuário não for administrador
+    if (!isAdmin) {
+        document.getElementById('product-form').style.display = 'none';
     }
     
     productList();

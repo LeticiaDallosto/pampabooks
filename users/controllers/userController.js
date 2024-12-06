@@ -19,7 +19,7 @@ const userRegister = async (req, res) => {
     }
     try {
         const encryptedPassword = bcrypt.hashSync(password, 10);
-        const newUser = new User({name, password: encryptedPassword, email, age, photo});
+        const newUser = new User({name, password: encryptedPassword, email, age, photo, isAdmin: false});
         await newUser.save();
         res.status(201).json({message: 'Usuário registrado com sucesso!'});
     } catch(err) {
