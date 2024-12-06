@@ -114,6 +114,35 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.error('Erro ao enviar avaliação:', erro);
         }
     });
+
+    // Adicionar ao carrinho
+    const cartButton = document.querySelector('.shopping-btn');
+    if (cartButton) {
+        cartButton.addEventListener('click', () => {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push(productId);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+        });
+    }
+
+    // Atualizar contador do carrinho
+    function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartCountElement = document.getElementById('cart-count');
+        if (cartCountElement) {
+            cartCountElement.textContent = cart.length;
+
+            if (cart.length === 0) {
+                cartCountElement.classList.add('hidden');
+            } else {
+                cartCountElement.classList.remove('hidden');
+            }
+        }
+    }
+
+    // Inicializar contador do carrinho
+    updateCartCount();
 });
 
 // Função para carregar as avaliações do produto

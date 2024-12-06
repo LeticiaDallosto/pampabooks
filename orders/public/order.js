@@ -82,4 +82,35 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Função para exibir itens do carrinho
+    async function displayCartItems() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartItemsContainer = document.getElementById('cart-items-container');
+        cartItemsContainer.innerHTML = '';
+
+        if (cart.length === 0) {
+            cartItemsContainer.innerText = 'Nenhum item no carrinho.';
+            return;
+        }
+
+        for (const itemId of cart) {
+            try {
+                const response = await fetch(`http://localhost:3003/catalog/${itemId}`);
+                const item = await response.json();
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('cart-item');
+                itemDiv.innerHTML = `
+                    <h3>${item.name}</h3>
+                    <p>Preço: R$ ${item.price.toFixed(2)}</p>
+                `;
+                cartItemsContainer.appendChild(itemDiv);
+            } catch (erro) {
+                console.error('Erro ao carregar detalhes do item do carrinho:', erro);
+            }
+        }
+    }
+
+    // Exibir itens do carrinho ao carregar a página
+    displayCartItems();
+
 });

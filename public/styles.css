@@ -291,8 +291,6 @@ select {
 /* Estilo de detalhes do produto */
 .product-container {
     display: flex;
-    align-items: center;
-    justify-content: center;
     gap: 20px;
     padding: 20px;
     background-color: #ffffff;
@@ -316,6 +314,20 @@ select {
     -webkit-text-fill-color: transparent;
 }
 
+.shopping-btn {
+    background: linear-gradient(45deg, #3a5a40, #81b29a);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-left: 20px;
+}
+
 #product-details h2 {
     color: #3a5a40;
     font-size: 24px;
@@ -327,6 +339,20 @@ select {
     color: #666;
     font-size: 16px;
     margin: 10px 0;
+}
+
+.cart-count {
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+    position: relative;
+    top: -10px;
+    left: -10px;
+}
+.hidden {
+    display: none;
 }
 
 /* Estilo das avaliações */
