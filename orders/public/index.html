@@ -10,16 +10,21 @@
 <body>
     <header id="header"></header>
     <h1>Itens no Carrinho</h1>
-    <div id="cart-items-container"></div>
-    <h1>Pedidos</h1>
     <form id="order-form">
-        <label for="bookId">Livro: </label>
-        <select name="bookId" id="bookId" required></select><br>
-        <label for="quantity">Quantidade: </label>
-        <input type="number" name="quantity" id="quantity" required><br>
+         <table id="cart-items-table">
+            <thead>
+                <tr>
+                    <th>Descrição do Produto</th>
+                    <th>Preço</th>
+                    <th>Quantidade</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="cart-items-container"></tbody>
+        </table>
         <button type="submit">Fazer pedido</button>
     </form>
-    <div id="order-message"></div>
+    <div id="order-message" class="order-message"></div>
     
     <h2>Lista de Pedidos</h2>
     <div id="orders-container"></div>

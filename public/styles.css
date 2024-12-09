@@ -242,6 +242,35 @@ select {
 }
 
 /* Estilo de pedidos */
+#order-form {
+    max-width: 600px; 
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.quantity-input {
+    width: 80px !important; 
+}
+
+/* Estilo da tabela de itens do carrinho */
+#cart-items-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#cart-items-table th, #cart-items-table td {
+    padding: 12px 15px; 
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+#cart-items-table th {
+    background-color: #f2f2f2;
+}
+
 #orders-container {
     display: flex;
     flex-wrap: wrap;
@@ -286,6 +315,13 @@ select {
     color: #666;
     font-size: 14px;
     margin: 5px 0;
+}
+
+.order-message {
+    text-align: center; 
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #3a5a40;
 }
 
 /* Estilo de detalhes do produto */
