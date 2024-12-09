@@ -1,16 +1,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
 
     // Sincronizar cabeçalho e rodapé
-    fetch('/header.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('header').innerHTML = data;
-        });
-    fetch('/footer.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('footer').innerHTML = data;
-        });
+    loadHeaderAndFooter()
 
     const urlParams = new URLSearchParams(window.location.search);
     const productId = urlParams.get('id');
@@ -138,6 +129,38 @@ document.addEventListener('DOMContentLoaded', async () => {
             } else {
                 cartCountElement.classList.remove('hidden');
             }
+        }
+    }
+
+    async function loadHeaderAndFooter() {
+        try {
+            // Fetch and load the header
+            const headerResponse = await fetch('/header.html');
+            const headerData = await headerResponse.text();
+            document.getElementById('header').innerHTML = headerData;
+    
+            // Call the function to update the cart count after the header is loaded
+            updateCartCount();
+
+            const cartListButton = document.getElementById('cart-button');
+            cartListButton.addEventListener('click', function(e) {
+                e.preventDefault();
+        
+                const products = JSON.parse(localStorage.getItem('cart')) || [];
+                const cartParam = products.map(function(product) {
+                    return encodeURIComponent(product);
+                }).join(',');
+
+                const newUrl = 'http://localhost:3004?cart=' + cartParam;
+                window.location.href = newUrl;
+            });
+    
+            // Fetch and load the footer
+            const footerResponse = await fetch('/footer.html');
+            const footerData = await footerResponse.text();
+            document.getElementById('footer').innerHTML = footerData;
+        } catch (error) {
+            console.error('Error loading header or footer:', error);
         }
     }
 

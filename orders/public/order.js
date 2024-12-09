@@ -1,20 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Sincronizar cabeçalho e rodapé
+    loadHeaderAndFooter()
+
     // Função para listar pedidos
     orderList(); 
     // Função para carregar os livros do catálogo
     loadBooks();
 
-    // Sincronizar cabeçalho e rodapé
-    fetch('/header.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('header').innerHTML = data;
-        });
-    fetch('/footer.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('footer').innerHTML = data;
-        });
+
 
     const orderForm = document.getElementById('order-form');
     orderForm.addEventListener('submit', async (e) => {
@@ -110,6 +103,68 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function restoreProductsToLocalStorage() {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const cartParam = urlParams.get('cart');
+
+        const products = cartParam.split(',').map(function(product) {
+            return decodeURIComponent(product);
+        });
+
+        localStorage.setItem('cart', JSON.stringify(products));
+
+        const newUrl = window.location.origin + window.location.pathname;
+        window.history.replaceState({}, document.title, newUrl); // Atualiza a URL sem recarregar a página
+    }
+
+    async function loadHeaderAndFooter() {
+        try {
+            // Fetch and load the header
+            const headerResponse = await fetch('/header.html');
+            const headerData = await headerResponse.text();
+            document.getElementById('header').innerHTML = headerData;
+    
+            // Call the function to update the cart count after the header is loaded
+            updateCartCount();
+
+            const cartListButton = document.getElementById('cart-button');
+            cartListButton.addEventListener('click', function(e) {
+                e.preventDefault();
+        
+                const products = JSON.parse(localStorage.getItem('cart')) || [];
+                const cartParam = products.map(function(product) {
+                    return encodeURIComponent(product);
+                }).join(',');
+
+                const newUrl = 'http://localhost:3004?cart=' + cartParam;
+                window.location.href = newUrl;
+            });
+    
+            // Fetch and load the footer
+            const footerResponse = await fetch('/footer.html');
+            const footerData = await footerResponse.text();
+            document.getElementById('footer').innerHTML = footerData;
+        } catch (error) {
+            console.error('Error loading header or footer:', error);
+        }
+    }
+
+    function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartCountElement = document.getElementById('cart-count');
+        if (cartCountElement) {
+            cartCountElement.textContent = cart.length;
+
+            if (cart.length === 0) {
+                cartCountElement.classList.add('hidden');
+            } else {
+                cartCountElement.classList.remove('hidden');
+            }
+        }
+    }
+    
+    restoreProductsToLocalStorage()
     // Exibir itens do carrinho ao carregar a página
     displayCartItems();
 
