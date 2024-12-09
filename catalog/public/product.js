@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         productDetails.innerHTML = `
             <h2>${product.name}</h2>
             <p>Preço: R$ ${product.price.toFixed(2)}</p>
-            <p>Descrição: ${product.description || 'N/A'}</p>
-            <p>Categoria: ${product.category || 'N/A'}</p>
+            <p>Descrição: ${product.description || 'Este livro é uma referência essencial para aprender e aplicar conhecimentos na área de tecnologia. Com abordagem prática e exemplos claros, é ideal para estudantes, profissionais e entusiastas. Uma ferramenta indispensável para quem busca se atualizar e se destacar no setor.'}</p>
+            <p>Categoria: ${product.category || 'Educação e Tecnologia'}</p>
             <p>Data de Criação: ${new Date(product.criationDate).toLocaleDateString()}</p>
         `;
 
