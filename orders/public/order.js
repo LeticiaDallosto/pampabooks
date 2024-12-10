@@ -158,6 +158,7 @@ async function loadBooks() {
     }
 }
 
+// Função para buscar produtos adicionados ao carrinho
 function restoreProductsToLocalStorage() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -170,17 +171,16 @@ function restoreProductsToLocalStorage() {
     localStorage.setItem('cart', JSON.stringify(products));
 
     const newUrl = window.location.origin + window.location.pathname;
-    window.history.replaceState({}, document.title, newUrl); // Atualiza a URL sem recarregar a página
+    window.history.replaceState({}, document.title, newUrl); 
 }
 
+// Função para carregar cabeçalho e rodapé
 async function loadHeaderAndFooter() {
     try {
-        // Fetch and load the header
         const headerResponse = await fetch('/header.html');
         const headerData = await headerResponse.text();
         document.getElementById('header').innerHTML = headerData;
 
-        // Call the function to update the cart count after the header is loaded
         updateCartCount();
 
         const cartListButton = document.getElementById('cart-button');
@@ -196,7 +196,6 @@ async function loadHeaderAndFooter() {
             window.location.href = newUrl;
         });
 
-        // Fetch and load the footer
         const footerResponse = await fetch('/footer.html');
         const footerData = await footerResponse.text();
         document.getElementById('footer').innerHTML = footerData;

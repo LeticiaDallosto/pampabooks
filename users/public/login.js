@@ -16,11 +16,8 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
     const data = await response.json();
     const loginMessage = document.getElementById('message');
     if (response.ok) {
-        // localStorage.setItem('token', data.accessToken);
-        // localStorage.setItem('refreshToken', data.refreshToken);
         loginMessage.textContent = 'Login efetuado com sucesso!';
         setTimeout(() => {
-            // window.location.href = 'http://localhost:3003';
             window.location.href = 'http://localhost:3003?token='+ encodeURIComponent(data.accessToken);
         }, 1000);
     } else {

@@ -28,14 +28,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
+    // Função para carregar o cabeçalho e rodapé
     async function loadHeaderAndFooter() {
         try {
-            // Fetch and load the header
             const headerResponse = await fetch('/header.html');
             const headerData = await headerResponse.text();
             document.getElementById('header').innerHTML = headerData;
     
-            // Call the function to update the cart count after the header is loaded
             updateCartCount();
 
             const cartListButton = document.getElementById('cart-button');
@@ -51,7 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.location.href = newUrl;
             });
     
-            // Fetch and load the footer
             const footerResponse = await fetch('/footer.html');
             const footerData = await footerResponse.text();
             document.getElementById('footer').innerHTML = footerData;
